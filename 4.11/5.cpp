@@ -1,0 +1,36 @@
+/*
+题目描述
+统计一篇文章里不同单词的总数。
+
+输入
+有多组数据，每组一行，每组就是一篇小文章。每篇小文章都是由小写字母和空格组成，没有标点符号，遇到#时表示输入结束。
+
+输出
+每组只输出一个整数，其单独成行，该整数代表一篇文章里不同单词的总数。
+
+样例输入
+you are my friend    
+#
+样例输出
+4
+*/
+#include <iostream>
+#include <sstream>
+#include<string>
+#include<set>
+using namespace std;
+
+int main()
+{
+    set <string> ans;
+    stringstream temp;
+    string s;
+    while( getline(cin,s) && s!="#")  
+    {
+        stringstream temp(s);            
+        ans.clear();
+        while(temp>>s) ans.insert(s);
+        cout<<ans.size()<<endl;
+    }
+    return 0;
+}

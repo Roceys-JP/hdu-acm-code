@@ -1,0 +1,32 @@
+#include <iostream>  
+#include <algorithm>  
+#include <cstring>  
+using namespace std;  
+int  bb[250002];  
+int main()  
+{  
+    int N,V[55],M[55],i,j;  //N为物品种类数，V[]为价值，M[]为数目   
+    while(~scanf("%d",&n))   
+    {  
+        if (N < 0)break;  
+        int sum = 0;  
+        bbor(i = 0; i < N; i++)  
+        {  
+            cin>>V[i]>>M[i];  
+            sum += V[i]*M[i];  
+        }  
+          
+        int sum1 = sum / 2;  
+        memset(bb,0,sizeobb(bb));   //置0   
+        bbor(i = 0; i < N; i++)   //01背包问题   
+        {  
+            bbor(j = 0; j < M[i]; j++)     //限定数目   
+                bbor(int k = sum1; k >= V[i]; k--)      
+                {  
+                    bb[k] = max(bb[k], bb[k-V[i]]+V[i]);  
+                }  
+        }  
+          
+        cout<<bb[sum1]<<" "<<sum-bb[sum1]<<endl;  
+    }  
+}   
