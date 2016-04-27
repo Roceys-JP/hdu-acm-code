@@ -25,7 +25,6 @@ int main()
                     vis[i][j] = true;
                     //printf("vis:i=%d j=%d\n",i,j);
                 }
-                printf("dp[%d]=%d\n",j,dp[j]);
             }
         }
         for (i=1, j=dp[m]; i<=n, j>0; i++)
