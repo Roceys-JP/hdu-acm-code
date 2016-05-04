@@ -1,17 +1,8 @@
-#include "iostream"  
 #include "stdio.h"  
-#include "math.h"  
-#include "vector"  
-#include "queue"  
-#include "memory.h"  
-#include "algorithm"  
-#include "string"  
-using namespace std;  
+using namespace std;
 #define max(a,b) a>b?a:b
 #define min(a,b) a<b?a:b
-
-int n;
-int a[10010];
+int n,a[10010];
 
 int main()
 {
@@ -29,9 +20,9 @@ int main()
                e=i;
                maxx=tmp;
             }
-            else if(tmp<0)
+            else if(tmp<0)//这时候已经没有必要计算，因为为负数则无论怎么后面的数值变化都是负影响．
             {
-               j=i+1;
+               j=i+1;//从新划定下一个起始位置
                tmp=0;
             }
         }
@@ -40,4 +31,3 @@ int main()
         printf("%d %d %d\n",maxx,a[s],a[e]);
     }
 }
-
