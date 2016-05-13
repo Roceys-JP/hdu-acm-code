@@ -1,4 +1,36 @@
 {"err_msg":"recognition error.","err_no":3301,"sn":"802415267271461830365"}
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+#include <stdio.h>
+using namespace std;
+#define max(a,b) (a>b?a:b)
+int N,M;
+int A[101][101];
+int f[101];
+void GroupPack() //跟P06所讲一模一样，直接照着思路敲就行了。
+{
+    memset(f,0,sizeof(f));
+    int i,j,k;
+    for(i=1;i<=N;i++)
+        for(j=M;j>=0;j--)
+            for(k=1;k<=j;k++)
+                f[j]=max(f[j],f[j-k]+A[i][k]);
+    cout<<f[M]<<endl;
+}
+int main()
+{
+   //freopen("in.txt","r",stdin);
+    while(cin>>N>>M)
+    {
+        if(N==0&&M==0) break;
+        for(int i=1;i<=N;i++)
+            for(int j=1;j<=M;j++)
+                cin>>A[i][j];
+        GroupPack();
+    }
+    return 0;
+}
 7
 a[i] 1 9 4 5 3 8 2
   i  0 1 2 3 4 5 6
@@ -12,8 +44,24 @@ d[i] j 1 2 3 4 5 6
   6
 
 len = 2
+N = 2 c = 2
+A[][] i 1 2
+j       0 0
+1       2 1
+2       2 1
+i = 1 :
+f[j] = max(f[j],f[j-k]+A[i][k]);
+f[] k 1 2
+j   0 0 0
+2     2 1
+1     2 1
+i = 2
+f[] k 1 2
+j   0 0 0
+2     4 1
+1     2 1
 
-
+f[c] = 4
 
 
 
@@ -46,3 +94,81 @@ vis[i][j]  cout<<1
 j = 3, i=2
 vis[i][j]  cout<<2
 j =
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+int cmp(const void *a,const void *b)
+{
+    int* c = (int *)a;
+    int* d = (int *)b;
+    if(*c != *d)
+       return *c - *d;
+    return *(d+1) - *(c+1);
+    //按照传递第一项排序；如果相等就按第二项排序
+}
+int main()
+{
+    int a[1010][5] ,b[1010],t,n,i,j,temp;
+    scanf("%d",&t);
+    while(t--)
+    {
+          scanf("%d",&n); //输入n组数据
+          for(i=0;i<n;i++)
+          {
+               scanf("%d%d",&a[i][0],&a[i][1]);
+               if(a[i][0] > a[i][1])
+               {
+                  temp = a[i][0];
+                  a[i][0] = a[i][1];
+                  a[i][1] =temp;
+                  //完成转置，让前小后大
+               }
+         }
+          qsort(a,n,sizeof(a[0]),cmp);
+          int max=0;
+          for(i=0;i<n;i++)
+          {     max = 0;
+                for(j=i-1;j>=0;j--)
+                {
+                    if(a[j][1]<a[i][1] && b[j]>max)
+                       max = b[j];
+                       //每次都找之前最大的那个
+                }
+                b[i] = max + 1;
+          }
+          int count = 0;
+          for(i=0;i<n;i++)
+             if(b[i] > count)
+                count = b[i];
+                //找所有最大的
+          printf("%d\n",count);
+    }
+    return 0;
+}
+1
+10
+1 2
+2 4
+5 8
+6 10
+7 9
+3 1
+5 8
+12 10
+9 7
+2 2
+
+1 2
+2 2
+2 4
+3 1
+5 8
+5 8
+6 10
+7 9
+9 7
+12 10
+dp[i] 1->10
+      1 2 3 4 5 6 7 8 9 10
+      1 1 2 1 3 3 4 4 4 5
