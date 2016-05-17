@@ -27,18 +27,14 @@ void insertTrie(TrieNode * * pRoot, char * str)
 	TrieNode * tmp = *pRoot;
 	int i = 0, k;
 	//一个一个的插入字符
-	while (str[i])
-	{
+	while (str[i]){
 		k = str[i] - 'a'; //当前字符 应该插入的位置
-		if (tmp->next[k])
-		{
-			tmp->next[k]->nCount++;
-		}
-		else
-		{
+		if (tmp->next[k]){
+            tmp->next[k]->nCount++;
+        }
+		else{
 			tmp->next[k] = createTrieNode();
 		}
-
 		tmp = tmp->next[k];
 		i++; //移到下一个字符
 	}
