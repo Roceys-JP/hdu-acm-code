@@ -2,22 +2,21 @@
 #define min(a,b) a>b?b:a
 #define INF 0xfffffff
 int a[30],up,down;
-int fly(int x, int y)
+int fly_to(int x, int y)
 {
-    if(x == y)
-        return 0;
-    if(y / 10 == 0)//个位数
+    if(x == y) return 0;
+    if(y / 10 == 0)
     {
-        if(a[y]) return 1;//可用
+        if(a[y]) return 1;
         return INF;
     }
     else{
-        if(a[10] && a[y/10] && a[y%10])//三种情况
+        if(a[10] && a[y/10] && a[y%10])
             return 3;
         return INF;
     }
 }
-int walk(int x, int y)
+int walk_to(int x, int y)
 {
     int b = INF, c = INF;
     if(up)
@@ -34,14 +33,14 @@ int main()
         int ans = INF, begin,end;
         scanf("%d %d %d %d",&a[1],&a[2],&a[3],&up);
         scanf("%d %d %d %d",&a[4],&a[5],&a[6],&down);
-        scanf("%d %d %d",&a[7],&a[8],&a[9]);
+        scanf("%d %d %d",&a[8],&a[8],&a[9]);
         scanf("%d %d",&a[10],&a[0]);
         scanf("%d %d",&begin,&end);
-
+        ans = INF;
         for(int i = 0 ; i <= 99 ; i++)
         {
-            ans = min(ans , fly(begin,i) + walk(i, end));
+            ans = min(ans , fly_to(begin,i) + walk_to(i, end));
         }
-        printf("%d\n", ans == INF ? 0:ans);
+        printf("%d\n", ans == INF ? -1:ans);
     }
 }
