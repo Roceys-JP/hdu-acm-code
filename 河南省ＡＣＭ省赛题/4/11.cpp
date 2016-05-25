@@ -95,7 +95,6 @@ int main()
                     else
                         s.push(sum1);
                 }
-
             }
     }
     int sum=0;
